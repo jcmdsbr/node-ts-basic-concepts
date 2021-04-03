@@ -1,4 +1,4 @@
-# The Node basic concepts in typescript :sunglasses:
+# The Node basic concepts in typescript using mongodb :sunglasses:
  - Learning basic concepts in typescript to create a rest api in node
 
 ## Give a Star! :star:
