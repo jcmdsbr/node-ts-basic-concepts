@@ -1,6 +1,6 @@
 # The Node basic concepts in ts using mongodb :sunglasses:
- - Learning basic concepts in typescript to create a rest api in node
-
+ - Learning node using typescript, express and mongo
+ 
 ## Give a Star! :star:
 
 If you liked the project, please give a star ;)
