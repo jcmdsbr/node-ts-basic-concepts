@@ -1,4 +1,4 @@
-# The Node basic concepts in typescript using mongodb :sunglasses:
+# The Node basic concepts in ts using mongodb :sunglasses:
  - Learning basic concepts in typescript to create a rest api in node
 
 ## Give a Star! :star:
@@ -18,20 +18,36 @@ connections can be handled concurrently. Upon each connection, the callback is
 fired, but if there is no work to be done, Node.js will sleep.
 
 ```javascript
-const http = require('http');
 
-const hostname = '127.0.0.1';
-const port = 3000;
+class Startup {
+    
+    app: express.Application;
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World');
-});
+    constructor() {
+        this.app = express();
+        this.configureServices();
+        this.configure();
+    }
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+    configureServices() {
+        MongoContext.createConnection();
+        this.app.use(bodyParser.json());
+        this.app.use(bodyParser.urlencoded({ extended: false }));
+    }
+
+    configure() {
+        this.app.route('/').get((req, res) => {
+            return res.send({ version: '0.0.1' });
+        });
+
+        // news
+        this.app.route('/api/v1/news').get(NewsController.getAsync);
+        this.app.route('/api/v1/news/:id').get(NewsController.getByIdAsync);
+        this.app.route('/api/v1/news').post(NewsController.addAsync);
+        this.app.route('/api/v1/news/:id').put(NewsController.updateAsync);
+        this.app.route('/api/v1/news/:id').delete(NewsController.deleteAsync);
+    }
+}
 ```
 ### Official Links :construction:
 
